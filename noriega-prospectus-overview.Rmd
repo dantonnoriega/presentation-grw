@@ -13,13 +13,20 @@ output:
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
+rfiles <- list.files("R")
+invisible(sapply(file.path("R", rfiles), source))
 ```
 
+class: center, middle, inverse
+
+# At a Glance
+
 ---
+class: middle
 
-- Chapter 1: An Analysis of the Double Up Food Bucks Program
-- Chapter 2: 
-
+### **Chapter 1** <br/>An Analysis of the Double Up Food Bucks Program
+### **Chapter 2** <br/>The Durham Connects Pilot & Requests for Social Services
+### **Chapter 3** <br/>SNAP EBT Transfer Dates & Off-Cycle Demand for Formal Assistance
 
 
 ---
