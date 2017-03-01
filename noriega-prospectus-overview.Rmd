@@ -9,7 +9,6 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-    output_dir: ' docs'
 ---
 
 ```{r setup, include=FALSE}
@@ -141,4 +140,9 @@ Unlike HIP, expansion and store-selection was *non-random*. I consider this a mi
 ---
 
 # How Am I Doing the Analysis?
+
+### Data
+
+- All sales data from 32 stores (17 treated, 15 control) from 2014-2016
+- **Status**: Being transferred. 
 
