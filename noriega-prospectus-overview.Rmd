@@ -223,9 +223,19 @@ ggplot2::ggplot(data = d, aes(x=Apps, fill = DC, alpha = DC)) +
 - **Bounded Rationality**: incomplete information, hueristics, status quo bias
 
 
+---
 
+# Simple Model
 
+.pull-left[
+$b$ = Benefit
+$d$ = Decision to apply
+]
 
+.pull-right[
+$c$ = Cost of applying
+$\tilde c$ = Cost of applying *after DC* 
+]
 
 
 
