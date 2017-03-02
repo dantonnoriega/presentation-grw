@@ -1,5 +1,5 @@
 ---
-title: "Prospectus Overview"
+title: "Topics on Welfare Policy"
 author: "Danton Noriega"
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 output:
@@ -8,24 +8,25 @@ output:
     nature:
       highlightStyle: github
       highlightLines: true
-      countIncrementalSlides: false
+      countIncrementalSlides: true
 ---
 
+
 ```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, error = FALSE, message = FALSE, fig.height = 4.6, fig.width = 7.6, dev = "svg")
 options(htmltools.dir.version = FALSE)
 rfiles <- list.files("R")
 invisible(sapply(file.path("R", rfiles), source))
 ```
 
-class: middle
-
-
-
 # At a Glance
 
-### **Chapter 1** <br/>An Analysis of the Double Up Food Bucks Program
-### **Chapter 2** <br/>SNAP EBT Transfer Dates & Off-Cycle Demand for Formal Assistance
-### **Chapter 3** <br/>The Durham Connects Pilot & Requests for Social Services
+### *Chapter 1* <br/>An Analysis of the Double Up Food Bucks Program
+### *Chapter 2* <br/>The Durham Connects Pilot & Requests for Social Services
+### *Chapter 3* <br/>SNAP EBT Transfer Dates & Off-Cycle Demand for Formal Assistance
+
+
+<!-- CHAPTER 1 -->
 
 
 ---
@@ -45,104 +46,241 @@ class: center, middle, inverse
 
 ### Hypotheses
 
-- A slight increase (1 - 2%) in SNAP EBT expenditures on fruits and vegetables (FVs) during the months the DUFB incentive is active in the experimental stores (Aug - Dec). 
+- A small increase (2 - 5%) in SNAP EBT expenditures on fruits and vegetables (FVs) during the months the DUFB incentive is active in the experimental stores (Aug - Dec).
 - No significant differences in FV expenditures during the months the incentive is not in effect (Jan - July).
 - The state's SNAP benefit schedule will affect when differences are detected. Difference, if found, will be detected during the 1st, 2nd, and 3rd weeks, fading during the 4th week.
 
 ---
-# Quick Background
+# Concept in a Plot
 
-### Double Up Food Bucks (DUFB)
+```{r echo=FALSE}
+source("R/DD.R")
+DD1()
+```
 
-- Financial incentive program targetting SNAP beneficiaries
-- Doubles purchasing power for FVs up to $20/day
-- Initially started in farmer's markets but expanding to other retail environments
+.footnote[
+> FAKE data.
+]
 
---
-
-### Fair Food Network (FFN) and FINI
-
-- Started Double Up Food Bucks in 2009
-  - One of many organization promoting financial incentive programs
-- Lead lobbying effort for the Food Insecurity Nutrition Initiative (FINI)
-- FINI provided $100 million to fund numerous pilot programs
-  - $5.17 million was awarded to FFN to help expand and test adjustments to DUFB
 
 ---
 
-# Policy Motivation
-
-### Problem
+### Motivation
 
 - High consumption of unhealthy foods, low consumption of fruits and vegetables
 - Overtime, poor diet leads to adverse health outcomes
 - Chronic diet-related diseases are expensive
 - US government could save lives and money by improving diets
 
----
+--
 
 ### Supplemental Nutrition Assistance Program (SNAP)
 
 - Anti-hunger program, not a nutrition program
 - Currently, few restrictions on what can be purchased with SNAP benefits
-- However, government funds SNAP, Medicare, and Medicaid
+- Substantial overlap between families participating in SNAP and Medicaid/Medicare
 - These programs are expensive
     - SNAP — $74 billion FY2015
     - Medicare — $646.2 billion FY2015
     - Medicaid - $545.1 billion FY2015
-- Substantial overlap between families participating in SNAP and Medicaid/Medicare
 
-**It is therefore possible to save money by improving the diet of SNAP beneficiaries.**
+*Possible to save money by improving the diet of SNAP beneficiaries.*
 
 ---
 
-# Proposed Policy Solutions
+### Double Up Food Bucks (DUFB)
 
-### Restrict SNAP
-
-Make SNAP more like Woman, Infants, and Children.
-
-- WIC strictly defines what beneficiaries *can* buy
-- SNAP defines what beneficiaries *cannot* buy
+- Financial incentive program targetting SNAP beneficiaries
+- Doubles purchasing power for FVs up to $20/day
+- Dollars (points) are earned buying local fresh produce
+- Can then be redeemed on *any* eligible produce
 
 --
-
-### Financial Incentives
-
-Increase fruit and vegetable purchases using financial incentives.
-
-- Includes DUFB and DUFB-like programs currently being evaluated
-- Also includes Healthy Incentives Pilot (HIP)
-  - Piloted from 2011 - 2012 and evaluated in 2014
-  - Considered successful
-- More popular with the public, policy makers, and beneficiares. 
-
----
-
-# What Have Others Done?
-
-HIP is the only means-tested financial incentives program. DUFB has yet to be evaluated in a grocery-store environment.
-
-- The incentive, a 30% rebate, is very different from the DUFB incentive
-- Had enough problems that more research is warrented
-  - Survey recall
-  - Confusion, lack of understanding of how the incentive worked
-  - Major retailer in county opted out of HIP
-
---
-
-# What Am I Doing?
-
-Analyzing transaction data from a single supermarket chain that has piloted and expanded the DUFB program from 2 stores, to 5, to 17 stores, starting in 2014.
-
-Unlike HIP, expansion and store-selection was *non-random*. I consider this a mixed blessing.
-
----
-
-# How Am I Doing the Analysis?
 
 ### Data
 
-- All sales data from 32 stores (17 treated, 15 control) from 2014-2016
-- **Status**: Being transferred. 
+- 3 years of sales data from 32 stores (17 treated, 15 control)
+- Sales data includes UPC, price, tender, time, etc.
+- **Status**: Testing transfer options.
+
+--
+
+### Known and Expected Data Challenges
+
+1. Purchases not linked to customers
+2. Outcome Variable with non-trivial amount of zeros (corner solutions)
+3. Consumers maximize across multiple product types
+
+---
+
+### Methods
+
+All cross-sectional.
+
+1. Difference-in-Difference-in-Differences
+2. Hurdle Models
+3. Multiple Discrete-Continuous Extreme Value
+
+--
+
+### Unobserved Individual Effects?
+
+*Working on it.*
+
+- Assume shoppers fall into types 
+  - but also assume shopper type is dynamic
+- Determine shopper types via clustering using 
+  - shopping basket composition
+  - time/day of purchase
+
+
+
+
+
+<!-- CHAPTER 2 -->
+
+---
+class: center, middle, inverse
+
+# Chapter 2
+
+## Durham Connects & Request for Social Services
+
+---
+
+### Research Question: 
+
+> For families that participated in the Durham Connects pilot program, did the intervention (information and nurse contact) impact the future probability of applying for social services?
+
+--
+
+### Hypothesis
+
+- Expect to observed a larger proportion of families that participated in Durham Connects requesting social services. 
+- Hypothesis is that the information and nurse contact provided to DC families decreased the complexity of applying and navigating the social safety net. 
+- DC families are observed more frequently not because they are, on average, in greater need of assistance, but because they have been informed, encouraged, and enabled to seek out available resources.
+
+---
+# Concept in a Plot
+
+```{r echo=FALSE}
+set.seed(1985)
+y1 <- purrr::map_dbl(1 + rnorm(300, 1,2), round) %>%
+  data_frame(Apps = ., DC = "No")
+y2 <- purrr::map_dbl(1 + rnorm(300, 2,2), round) %>%
+  data_frame(Apps = ., DC = "Yes")
+d <- bind_rows(y1, y2) %>%
+    dplyr::mutate(Apps = replace(Apps, Apps < 0, NA))
+
+clrs <- scales::hue_pal()(2)
+ns <- d %>% 
+  na.omit() %>%
+  group_by(DC) %>%
+  summarise(n = n())
+
+n1 <- ns$n[1]
+n2 <- ns$n[2]
+
+
+ggplot2::ggplot(data = d, aes(x=Apps, fill = DC, alpha = DC)) +
+  scale_alpha_manual(values = c(.8, .5)) +
+  geom_histogram(position = 'dodge', binwidth = .5) + 
+  # stat_function(fun = function(x, mean, sd, n, lower, bw){ 
+  #     msm::dtnorm(x = x, mean = mean, sd = sd, lower = lower) * n * bw
+  #   }, 
+  #   args = list(mean = 2, sd = 2, lower = 0, n = n1 + n2, bw = .5),
+  #   color = clrs[1], size = 3, alpha = .8) +
+  # stat_function(fun = function(x, mean, sd, n, lower, bw){ 
+  #     msm::dtnorm(x = x, mean = mean, sd = sd, lower = lower) * n * bw
+  #   }, 
+  #   args = list(mean = 3, sd = 2, lower = 0, n = n1 + n2, bw = .5),
+  #   color = clrs[2], size = 3, alpha = .5) +
+  theme_clean() +
+  labs(x = expression(paste("Observed Applications in ",
+            group("(",list(0,T),"]"))),
+    y = "Count", title = "Observed Social Service Applications (T years since birth)")
+```
+
+
+---
+
+### Take-Up Rate
+
+> Percentage of eligible individuals receiving benefits.
+
+--
+
+### Take-Up Rate can be reduced by
+
+- Stigma
+- Onerous application process
+- Confusion, misunderstanding, misinformation
+
+### Frameworks
+
+- **Neoclassical**: rational, complete information
+  - Gap explained by *stigma* and other costs.
+- **Bounded Rationality**: incomplete information, hueristics, status quo bias
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- CHAPTER 2 -->
+
+---
+class: center, middle, inverse
+
+# Chapter 3
+
+## SNAP and Off-Cycle Demand for Assistance
+
+---
+
+### Research Question
+
+> Do request for additional assistance increase during the off-cycles of a household SNAP benefit schedules?
+
+### Hypothesis
+
+- Expect, in aggregate, an increase towards the last 2 weeks of the month following SNAP benefit transfers. 
+- That is, I expect to reject the null hypothesis that, in aggregate, request for formal assistance are randomly distributed between transfer dates.
+
+---
+
+# Concept in a Plot
+
+```{r echo=FALSE}
+set.seed(1985)
+dr <- purrr::map(1:30, ~data_frame(t=.x, y=rnorm(12,4,3), h="H0")) %>%
+  dplyr::bind_rows()
+dnr <- purrr::map(1:30, ~data_frame(t=.x, y=.008*.x^2 + rnorm(12,3,3), h="H1")) %>%
+  dplyr::bind_rows()
+d <- bind_rows(dr, dnr) %>%
+    dplyr::mutate(y = replace(y, y < 0, 0))
+ggplot2::ggplot(data = d, aes(x=t,y=y,color = h)) + 
+  geom_point(size=1) + 
+  scale_size_manual(values=c(2,3)) +
+  geom_smooth() + 
+  theme_clean() +
+  labs(y = "Requests", x = "Days since Transfer", title = "Pooled Request by Day since Transfer")
+```
+
+> FAKE data.
+
+
+
+
+
+
 

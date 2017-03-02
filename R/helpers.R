@@ -26,7 +26,7 @@ theme_clean <- function(base_size=12, base_family="Source Sans Pro Light") {
           axis.title=element_text(size=rel(0.8), family="Source Sans Pro Semibold"),
           strip.text=element_text(size=rel(1), family="Source Sans Pro Semibold"),
           strip.background=element_rect(fill="#ffffff", colour=NA),
-          panel.margin.y=unit(1, "lines"))
+          panel.spacing.y=unit(1, "lines"))
 
   ret
 }

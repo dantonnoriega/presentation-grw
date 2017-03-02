@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Prospectus Overview</title>
+    <title>Topics on Welfare Policy</title>
     <meta charset="utf-8">
     <meta name="author" content="Danton Noriega" />
-    <meta name="date" content="2017-03-01" />
+    <meta name="date" content="2017-03-02" />
     <link href="libs/remark-css/example.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Prospectus Overview
+# Topics on Welfare Policy
 ### Danton Noriega
-### March 01, 2017
+### March 02, 2017
 
 ---
 
 
 
 
-class: middle
-
-
 
 # At a Glance
 
-### **Chapter 1** &lt;br/&gt;An Analysis of the Double Up Food Bucks Program
-### **Chapter 2** &lt;br/&gt;SNAP EBT Transfer Dates &amp; Off-Cycle Demand for Formal Assistance
-### **Chapter 3** &lt;br/&gt;The Durham Connects Pilot &amp; Requests for Social Services
+### *Chapter 1* &lt;br/&gt;An Analysis of the Double Up Food Bucks Program
+### *Chapter 2* &lt;br/&gt;The Durham Connects Pilot &amp; Requests for Social Services
+### *Chapter 3* &lt;br/&gt;SNAP EBT Transfer Dates &amp; Off-Cycle Demand for Formal Assistance
+
+
+&lt;!-- CHAPTER 1 --&gt;
 
 
 ---
@@ -48,112 +48,190 @@ class: center, middle, inverse
 
 ### Hypotheses
 
-- A slight increase (1 - 2%) in SNAP EBT expenditures on fruits and vegetables (FVs) during the months the DUFB incentive is active in the experimental stores (Aug - Dec). 
+- A small increase (2 - 5%) in SNAP EBT expenditures on fruits and vegetables (FVs) during the months the DUFB incentive is active in the experimental stores (Aug - Dec).
 - No significant differences in FV expenditures during the months the incentive is not in effect (Jan - July).
 - The state's SNAP benefit schedule will affect when differences are detected. Difference, if found, will be detected during the 1st, 2nd, and 3rd weeks, fading during the 4th week.
 
 ---
-# Quick Background
+# Concept in a Plot
 
-### Double Up Food Bucks (DUFB)
+![](noriega-prospectus-overview_files/figure-html/unnamed-chunk-1-1.svg)&lt;!-- --&gt;
 
-- Financial incentive program targetting SNAP beneficiaries
-- Doubles purchasing power for FVs up to $20/day
-- Initially started in farmer's markets but expanding to other retail environments
+.footnote[
+&gt; FAKE data.
+]
 
---
-
-### Fair Food Network (FFN) and FINI
-
-- Started Double Up Food Bucks in 2009
-  - One of many organization promoting financial incentive programs
-- Lead lobbying effort for the Food Insecurity Nutrition Initiative (FINI)
-- FINI provided $100 million to fund numerous pilot programs
-  - $5.17 million was awarded to FFN to help expand and test adjustments to DUFB
 
 ---
 
-# Policy Motivation
-
-### Problem
+### Motivation
 
 - High consumption of unhealthy foods, low consumption of fruits and vegetables
 - Overtime, poor diet leads to adverse health outcomes
 - Chronic diet-related diseases are expensive
 - US government could save lives and money by improving diets
 
----
+--
 
 ### Supplemental Nutrition Assistance Program (SNAP)
 
 - Anti-hunger program, not a nutrition program
 - Currently, few restrictions on what can be purchased with SNAP benefits
-- However, government funds SNAP, Medicare, and Medicaid
+- Substantial overlap between families participating in SNAP and Medicaid/Medicare
 - These programs are expensive
     - SNAP — $74 billion FY2015
     - Medicare — $646.2 billion FY2015
     - Medicaid - $545.1 billion FY2015
-- Substantial overlap between families participating in SNAP and Medicaid/Medicare
 
-**It is therefore possible to save money by improving the diet of SNAP beneficiaries.**
+*Possible to save money by improving the diet of SNAP beneficiaries.*
 
 ---
 
-# Proposed Policy Solutions
+### Double Up Food Bucks (DUFB)
 
-### Restrict SNAP
-
-Make SNAP more like Woman, Infants, and Children.
-
-- WIC strictly defines what beneficiaries *can* buy
-- SNAP defines what beneficiaries *cannot* buy
+- Financial incentive program targetting SNAP beneficiaries
+- Doubles purchasing power for FVs up to $20/day
+- Dollars (points) are earned buying local fresh produce
+- Can then be redeemed on *any* eligible produce
 
 --
-
-### Financial Incentives
-
-Increase fruit and vegetable purchases using financial incentives.
-
-- Includes DUFB and DUFB-like programs currently being evaluated
-- Also includes Healthy Incentives Pilot (HIP)
-  - Piloted from 2011 - 2012 and evaluated in 2014
-  - Considered successful
-- More popular with the public, policy makers, and beneficiares. 
-
----
-
-# What Have Others Done?
-
-HIP is the only means-tested financial incentives program. DUFB has yet to be evaluated in a grocery-store environment.
-
-- The incentive, a 30% rebate, is very different from the DUFB incentive
-- Had enough problems that more research is warrented
-  - Survey recall
-  - Confusion, lack of understanding of how the incentive worked
-  - Major retailer in county opted out of HIP
-
---
-
-# What Am I Doing?
-
-Analyzing transaction data from a single supermarket chain that has piloted and expanded the DUFB program from 2 stores, to 5, to 17 stores, starting in 2014.
-
-Unlike HIP, expansion and store-selection was *non-random*. I consider this a mixed blessing.
-
----
-
-# How Am I Doing the Analysis?
 
 ### Data
 
-- All sales data from 32 stores (17 treated, 15 control) from 2014-2016
-- **Status**: Being transferred.
+- 3 years of sales data from 32 stores (17 treated, 15 control)
+- Sales data includes UPC, price, tender, time, etc.
+- **Status**: Testing transfer options.
+
+--
+
+### Known and Expected Data Challenges
+
+1. Purchases not linked to customers
+2. Outcome Variable with non-trivial amount of zeros (corner solutions)
+3. Consumers maximize across multiple product types
+
+---
+
+### Methods
+
+All cross-sectional.
+
+1. Difference-in-Difference-in-Differences
+2. Hurdle Models
+3. Multiple Discrete-Continuous Extreme Value
+
+--
+
+### Unobserved Individual Effects?
+
+*Working on it.*
+
+- Assume shoppers fall into types 
+  - but also assume shopper type is dynamic
+- Determine shopper types via clustering using 
+  - shopping basket composition
+  - time/day of purchase
+
+
+
+
+
+&lt;!-- CHAPTER 2 --&gt;
+
+---
+class: center, middle, inverse
+
+# Chapter 2
+
+## Durham Connects &amp; Request for Social Services
+
+---
+
+### Research Question: 
+
+&gt; For families that participated in the Durham Connects pilot program, did the intervention (information and nurse contact) impact the future probability of applying for social services?
+
+--
+
+### Hypothesis
+
+- Expect to observed a larger proportion of families that participated in Durham Connects requesting social services. 
+- Hypothesis is that the information and nurse contact provided to DC families decreased the complexity of applying and navigating the social safety net. 
+- DC families are observed more frequently not because they are, on average, in greater need of assistance, but because they have been informed, encouraged, and enabled to seek out available resources.
+
+---
+# Concept in a Plot
+
+![](noriega-prospectus-overview_files/figure-html/unnamed-chunk-2-1.svg)&lt;!-- --&gt;
+
+
+---
+
+### Take-Up Rate
+
+&gt; Percentage of eligible individuals receiving benefits.
+
+--
+
+### Take-Up Rate can be reduced by
+
+- Stigma
+- Onerous application process
+- Confusion, misunderstanding, misinformation
+
+### Frameworks
+
+- **Neoclassical**: rational, complete information
+  - Gap explained by *stigma* and other costs.
+- **Bounded Rationality**: incomplete information, hueristics, status quo bias
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;!-- CHAPTER 2 --&gt;
+
+---
+class: center, middle, inverse
+
+# Chapter 3
+
+## SNAP and Off-Cycle Demand for Assistance
+
+---
+
+### Research Question
+
+&gt; Do request for additional assistance increase during the off-cycles of a household SNAP benefit schedules?
+
+### Hypothesis
+
+- Expect, in aggregate, an increase towards the last 2 weeks of the month following SNAP benefit transfers. 
+- That is, I expect to reject the null hypothesis that, in aggregate, request for formal assistance are randomly distributed between transfer dates.
+
+---
+
+# Concept in a Plot
+
+![](noriega-prospectus-overview_files/figure-html/unnamed-chunk-3-1.svg)&lt;!-- --&gt;
+
+&gt; FAKE data.
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
 "highlightLines": true,
-"countIncrementalSlides": false
+"countIncrementalSlides": true
 });
 if (window.HTMLWidgets) slideshow.on('showSlide', function (slide) {setTimeout(function() {window.dispatchEvent(new Event('resize'));}, 100)});</script>
 
