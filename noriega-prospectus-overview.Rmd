@@ -8,7 +8,7 @@ output:
     nature:
       highlightStyle: github
       highlightLines: true
-      countIncrementalSlides: true
+      countIncrementalSlides: false
 ---
 
 
@@ -21,9 +21,9 @@ invisible(sapply(file.path("R", rfiles), source))
 
 # At a Glance
 
-### *Chapter 1* <br/>An Analysis of the Double Up Food Bucks Program
-### *Chapter 2* <br/>The Durham Connects Pilot & Requests for Social Services
-### *Chapter 3* <br/>SNAP EBT Transfer Dates & Off-Cycle Demand for Formal Assistance
+### Chapter 1 <br/>*An Analysis of the Double Up Food Bucks Program*
+### Chapter 2 <br/>*The Durham Connects Pilot & Requests for Social Services*
+### Chapter 3 <br/>*SNAP EBT Transfer Dates & Off-Cycle Demand for Formal Assistance*
 
 
 <!-- CHAPTER 1 -->
@@ -201,6 +201,23 @@ ggplot2::ggplot(data = d, aes(x=Apps, fill = DC, alpha = DC)) +
     y = "Count", title = "Observed Social Service Applications (T years since birth)")
 ```
 
+---
+
+# Durham Connects (DC) Program
+
+- Piloted from July 1, 2009 to Dec 31, 2010
+  - 4777 resident births randomly assigned to DC by DOB (even days)
+- Universal postnatal nurse home-visiting program
+- Aim to reduce emergency room visits and reduce child maltreatment
+- Nurses assess and rate 12 factors along 4 domains
+  - Domains: *Health Care, Caring for Infant, Home Safety, Parent Wellbeing*
+  - Rated from 1 to 4
+      - $1$ - no risk, basic guidance provided
+      - $2$ - needs/concerns addressed via education & guidance
+      - $3$ - issues addressed by linkage with community resources
+      - $4$ - urgent need, immediate invervention required
+- Top referral was to Durham Social Service (Erica Ward)
+  
 
 ---
 
@@ -216,32 +233,101 @@ ggplot2::ggplot(data = d, aes(x=Apps, fill = DC, alpha = DC)) +
 - Onerous application process
 - Confusion, misunderstanding, misinformation
 
-### Frameworks
+--
+
+### Economic Frameworks
 
 - **Neoclassical**: rational, complete information
-  - Gap explained by *stigma* and other costs.
+  - Gap explained by *stigma* and other costs (search, transaction).
 - **Bounded Rationality**: incomplete information, hueristics, status quo bias
 
+---
+
+## Data
+
+### Center for Child and Family Health (CCFH)
+
+- Durham Connects Pilot Data
+  - **Short-term birth certificates**
+  - More detailed DC data exists
+      - IRB requirements complicated
+      - Don't think value added justifies efforts for access
+--
+
+### Durham Social Services (DSS)
+
+- Administrative Records
+  - Applications for Social Services (2012 - 2016)
+      - Verifying if data from 2009 - 2012 exists
+  - Also have SNAP, Medicaid, TANF
+  - Do not have WIC
+      - Feasible
 
 ---
 
 # Simple Model
 
+Assume all individuals are the same *except for assignment to DC*.
+<hr>
+
+$$\begin{gathered}
+  r  = \left \{ 
+    \begin{array}{c} 
+      1 \text{ if } NB > 0 \\ 
+      0 \text{ if } NB \le 0 
+    \end{array} \right. \\
+   \\
+  NB = B - c \\
+  \\
+P(d=1|\text{DC}) > P(d=1| \neg \text{DC})
+\end{gathered}$$
+
+<hr>
+
 .pull-left[
-$b$ = Benefit
-$d$ = Decision to apply
+$B~~~$ = Benefit <br>
+$NB$ = Net Benefit <br>
+$r~~~$ = Decision to apply (participate)
 ]
 
 .pull-right[
-$c$ = Cost of applying
-$\tilde c$ = Cost of applying *after DC* 
+$c$ = Cost of applying <br>
+$\tilde c$ = Cost of applying *given DC* <br>
+$\quad~$ where $c > \tilde c$
 ]
 
+---
 
+# Regression Framework
 
+Of interest:
+1. Probability of being observed applying *at all* (participation)
+2. How frequently observed applying (demand/consumption)
 
+--
 
+<hr>
+Let $r$ represent the decision to participate and $D$ assignment to DC.
+Observed applications (count), $y$, since birth of child for some fixed time $T$.
+<hr>
 
+--
+
+$$\begin{gather}
+w^* = \mathbf{z'} \alpha + \delta D + u, \quad
+r = \left \{ 
+  \begin{array} 
+    ~1 \text{ if } w^* > 0 \\ 
+    ~0 \text{ otherwise}
+  \end{array} \right .\\
+y^* = f(\mathbf{x}, D, v), \quad
+y = r \cdot max(0, y^*) \quad
+\end{gather}$$
+$$\begin{aligned}
+E[y^*|\mathbf{x},D] &= \mathbf{x' \beta} + \gamma D \quad \quad \quad \text{(OLS)} \\
+E[y^*|\mathbf{x},D] &= exp(\mathbf{x' \beta} + \gamma D) \quad \text{(Poisson)}
+\end{aligned}$$
+$$\star ~ E[u|D] = E[v|D] = 0 ~ \star$$
 
 
 
@@ -277,20 +363,84 @@ dr <- purrr::map(1:30, ~data_frame(t=.x, y=rnorm(12,4,3), h="H0")) %>%
 dnr <- purrr::map(1:30, ~data_frame(t=.x, y=.008*.x^2 + rnorm(12,3,3), h="H1")) %>%
   dplyr::bind_rows()
 d <- bind_rows(dr, dnr) %>%
-    dplyr::mutate(y = replace(y, y < 0, 0))
+  dplyr::mutate(y = replace(y, y < 0, 0)) %>%
+  dplyr::mutate(y = round(y))  
 ggplot2::ggplot(data = d, aes(x=t,y=y,color = h)) + 
-  geom_point(size=1) + 
+  geom_jitter(size=1, width = .05) + 
   scale_size_manual(values=c(2,3)) +
   geom_smooth() + 
   theme_clean() +
-  labs(y = "Requests", x = "Days since Transfer", title = "Pooled Request by Day since Transfer")
+  labs(y = "Requests", x = "Days since Transfer", title = "Pooled Request by Day since Transfer (12 Months)")
 ```
 
 > FAKE data.
 
+---
 
+### SNAP Overview
 
+- Cash-like benefit
+- Popular, expansive
+- Spent quickly
+- Not enough
 
+--
 
+### SNAP Benefit Schedule (North Carolina)
 
+- On-Cycle
+  - All odd days between 3 and 21, mapped to SSN 1,2,...,9,0
+  - Most of week 1 through week 3
+- Off-Cycle
+  - Days 22 through 2 of the next month
+  - Week 4
 
+---
+
+### Emergency Assistance
+
+Durham Social Services provides financial assistance for
+- General emergency 
+- Rent and utilities
+- Food and transportation
+
+### Cash Constrained
+
+- Families coping with povery lack cash
+- Need cash to buy food once SNAP runs out
+- But cash is needed for other expenses
+- **Demand for cash highest during off-cycle?**
+
+---
+
+# Data
+
+### Durham Social Services (DSS)
+
+- Emergency Assistance Requested & Provided
+  - Date of request
+  - Type of assistance
+  - Case number and Names
+- SNAP EBT
+  - Transfer Dates
+  - Amonts
+  - Case number and Names
+
+---
+
+### Model
+
+- Discrete-Time Events
+- Benefits distribution date ($t=0$)
+
+### Confounders
+
+- Pay-period
+- End-of-month cash demands
+  - utilities
+  - rent
+
+---
+class: middle, center
+
+# Thank you
